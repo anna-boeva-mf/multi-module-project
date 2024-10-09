@@ -1,11 +1,15 @@
 package ru.tbank.xml;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Data
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Valute {
     @JacksonXmlProperty(isAttribute = true, localName = "ID")
     private String id;
@@ -27,4 +31,7 @@ public class Valute {
 
     @JacksonXmlProperty(localName = "VunitRate")
     private String vunitRate;
+
+    public Valute(String valuteCode, String number) {
+    }
 }
