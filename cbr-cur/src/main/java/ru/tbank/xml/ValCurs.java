@@ -14,10 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ValCurs {
-    @JacksonXmlProperty(isAttribute = true, localName = "Date")
+    @JacksonXmlProperty(localName = "Date", isAttribute = true)
     private String date;
 
-    @JacksonXmlProperty(isAttribute = true, localName = "name")
+    @JacksonXmlProperty(localName = "name", isAttribute = true)
     private String name;
 
     @JacksonXmlElementWrapper(useWrapping = false)

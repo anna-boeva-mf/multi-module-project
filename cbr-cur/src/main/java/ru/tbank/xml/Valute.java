@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Valute {
-    @JacksonXmlProperty(isAttribute = true, localName = "ID")
+    @JacksonXmlProperty(localName = "ID", isAttribute = true)
     private String id;
 
     @JacksonXmlProperty(localName = "NumCode")

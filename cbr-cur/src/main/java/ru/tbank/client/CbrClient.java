@@ -34,6 +34,7 @@ public class CbrClient {
     @Cacheable("currencyRates")
     @CircuitBreaker(name = "cbr-client", fallbackMethod = "fallbackGetCurrencyRates")
     public List<CurrencyRate> getCurrencyRates() {
+        log.info("Getting a list of exchange rates from the Central Bank service");
         ValCurs valCurs = restTemplate.getForObject(cbrfUrl + "?date_req=" + new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()), ValCurs.class);
         return valCurs.getValutes().stream()
                 .map(valute -> new CurrencyRate(valute.getCharCode(), valute.getValue()))
@@ -41,8 +42,7 @@ public class CbrClient {
     }
 
     private List<CurrencyRate> fallbackGetCurrencyRates(Throwable throwable) throws Throwable {
-    /*    log.error("Получение курсов валют из сервиса невозможно. Причина: {}.\nStackTrace: {}",
-                 throwable.getMessage(), throwable.getStackTrace());*/
+        log.error("Problem with getting list of exchange rates from the service: {}", throwable.getMessage());
         if (throwable instanceof CallNotPermittedException) {
             throw new ServiceUnavailableException("The service is unavailable, please try again later");
         } else {
