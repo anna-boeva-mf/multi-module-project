@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
 group = 'ru.tbank'
@@ -10,6 +12,38 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.3.4'
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+    implementation 'com.fasterxml.jackson.core:jackson-core'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    implementation 'io.github.resilience4j:resilience4j-circuitbreaker:2.1.0'
+    implementation 'io.github.resilience4j:resilience4j-spring-boot2:2.0.0'
+    implementation 'io.github.resilience4j:resilience4j-reactor:2.0.0'
+
+    implementation 'org.jsoup:jsoup:1.15.3'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    implementation files('libs/logging-starter-1.0.jar')
+
+    implementation 'io.swagger:swagger-annotations:1.6.14'
+    implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.14'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+    testImplementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.6.0'
+    testImplementation 'junit:junit:4.13.1'
+    implementation('io.rest-assured:rest-assured:5.5.0')
+    implementation('io.rest-assured:xml-path:5.5.0')
+    implementation('io.rest-assured:json-path:5.5.0')
 }
 
 test {
