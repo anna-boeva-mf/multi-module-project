@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import ru.tbank.exception.ServiceUnavailableException;
 import ru.tbank.logging.LogExecutionTime;
@@ -35,10 +36,18 @@ public class CbrClient {
     @CircuitBreaker(name = "cbr-client", fallbackMethod = "fallbackGetCurrencyRates")
     public List<CurrencyRate> getCurrencyRates() {
         log.info("Getting a list of exchange rates from the Central Bank service");
+        try {
         ValCurs valCurs = restTemplate.getForObject(cbrfUrl + "?date_req=" + new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()), ValCurs.class);
         return valCurs.getValutes().stream()
                 .map(valute -> new CurrencyRate(valute.getCharCode(), valute.getValue()))
                 .collect(Collectors.toList());
+        } catch (RestClientException e) {
+            log.error("Error occurred while fetching currency rates: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            log.error("Unexpected error occurred: {}", e.getMessage());
+            throw e;
+        }
     }
 
     private List<CurrencyRate> fallbackGetCurrencyRates(Throwable throwable) throws Throwable {

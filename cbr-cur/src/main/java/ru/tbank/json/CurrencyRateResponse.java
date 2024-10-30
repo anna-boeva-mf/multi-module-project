@@ -3,6 +3,8 @@ package ru.tbank.json;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Data
 @Getter
 @Setter
@@ -13,5 +15,5 @@ public class CurrencyRateResponse {
     private String currency;
 
     @JsonProperty("rate")
-    private Double rate;
+    private BigDecimal rate;
 }

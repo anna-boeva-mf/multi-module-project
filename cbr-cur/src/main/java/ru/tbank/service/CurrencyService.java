@@ -12,6 +12,7 @@ import ru.tbank.json.CurrencyRateResponse;
 import ru.tbank.logging.LogExecutionTime;
 import ru.tbank.xml.CurrencyRate;
 
+import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
 
@@ -29,12 +30,12 @@ public class CurrencyService {
             log.error("Non-existent currency " + code + " given");
             throw new BadRequestException("Non-existent currency " + code + " given");
         }
-        if (code.equals("RUB")) return new CurrencyRateResponse("RUB", 1.0);
+        if (code.equals("RUB")) return new CurrencyRateResponse("RUB", BigDecimal.valueOf(1.0));
         List<CurrencyRate> currencyRates = this.cbrClient.getCurrencyRates();
         CurrencyRateResponse response = currencyRates.stream()
                 .filter(rate -> rate.getCode().equals(code))
                 .findFirst()
-                .map(rate -> new CurrencyRateResponse(rate.getCode(), Double.parseDouble(rate.getRate().replace(",", ".")))).orElse(null);
+                .map(rate -> new CurrencyRateResponse(rate.getCode(), BigDecimal.valueOf(Long.parseLong(rate.getRate().replace(",", "."))))).orElse(null);
         if (response == null) {
             log.error("The currency " + code + " is not included in the list of the Central Bank of the Russian Federation");
             throw new CurrencyNotFoundException("The currency " + code + " is not included in the list of the Central Bank of the Russian Federation");
@@ -45,7 +46,7 @@ public class CurrencyService {
     public CurrencyConverterResponse convertCurrency(CurrencyConverterRequest request) {
         String fromCurrency = request.getFromCurrency();
         String toCurrency = request.getToCurrency();
-        Double amount = request.getAmount();
+        BigDecimal amount = request.getAmount();
         if (fromCurrency == null) {
             log.error("Parameter fromCurrency is missing");
             throw new BadRequestException("Parameter fromCurrency is missing");
@@ -58,13 +59,13 @@ public class CurrencyService {
             log.error("Parameter amount is missing");
             throw new BadRequestException("Parameter amount is missing");
         }
-        if (amount <= 0) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             log.error("Parameter amount must be greater than zero");
             throw new BadRequestException("Parameter amount must be greater than zero");
         }
         CurrencyRateResponse fromRate = getCurrencyRate(request.getFromCurrency());
         CurrencyRateResponse toRate = getCurrencyRate(request.getToCurrency());
-        double convertedAmount = request.getAmount() * fromRate.getRate() / toRate.getRate();
+        BigDecimal convertedAmount = request.getAmount().multiply(fromRate.getRate()).divide(toRate.getRate());
         return new CurrencyConverterResponse(request.getFromCurrency(), request.getToCurrency(), convertedAmount);
     }
 }

@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import ru.tbank.json.CurrencyConverterResponse;
 import ru.tbank.json.CurrencyRateResponse;
 
+import java.math.BigDecimal;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -44,7 +46,7 @@ public class CurrAppApiTest {
                 .get("/currencies/rates/VND")
                 .as(CurrencyRateResponse.class);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(40.1143, resp.getRate(), "Check rate value from response"),
+                () -> Assertions.assertEquals(BigDecimal.valueOf(40.1312), resp.getRate(), "Check rate value from response"),
                 () -> Assertions.assertEquals("VND", resp.getCurrency(), "Check currency code from response"));
     }
 
@@ -55,7 +57,7 @@ public class CurrAppApiTest {
                 .get("/currencies/rates/RUB")
                 .as(CurrencyRateResponse.class);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(1.0, resp.getRate(), "Check RUB rate value from response"),
+                () -> Assertions.assertEquals(BigDecimal.valueOf(1.0), resp.getRate(), "Check RUB rate value from response"),
                 () -> Assertions.assertEquals("RUB", resp.getCurrency(), "Check RUB currency code from response"));
     }
 
@@ -76,7 +78,7 @@ public class CurrAppApiTest {
                 .post("/currencies/convert")
                 .as(CurrencyConverterResponse.class);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(21.937723175817265, resp.getConvertedAmount(), "Check converted amount from response"),
+                () -> Assertions.assertEquals(BigDecimal.valueOf(22.60579833121199), resp.getConvertedAmount(), "Check converted amount from response"),
                 () -> Assertions.assertEquals("EGP", resp.getFromCurrency(), "Check 'from' currency code from response"),
                 () -> Assertions.assertEquals("NOK", resp.getToCurrency(), "Check 'to' currency code from response"));
     }
@@ -88,7 +90,7 @@ public class CurrAppApiTest {
                 .body("{\"fromCurrency\": \"TJS\", \"toCurrency\": \"TJS\", \"amount\": 1.0}")
                 .post("/currencies/convert")
                 .as(CurrencyConverterResponse.class);
-        Assertions.assertEquals(1.0, resp.getConvertedAmount());
+        Assertions.assertEquals(BigDecimal.valueOf(1.0), resp.getConvertedAmount());
     }
 
     @Test

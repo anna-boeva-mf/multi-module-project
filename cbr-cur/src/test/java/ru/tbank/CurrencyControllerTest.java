@@ -16,11 +16,14 @@ import ru.tbank.json.CurrencyConverterResponse;
 import ru.tbank.json.CurrencyRateResponse;
 import ru.tbank.service.CurrencyService;
 
+import java.math.BigDecimal;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest({CurrencyController.class})
 class CurrencyControllerTest {
@@ -33,9 +36,10 @@ class CurrencyControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+
     @Test
     public void getCurrencyRateTest_ExistingCurrency() throws Exception {
-        when(currencyService.getCurrencyRate("USD")).thenReturn(new CurrencyRateResponse("USD", 96.9483));
+        when(currencyService.getCurrencyRate("USD")).thenReturn(new CurrencyRateResponse("USD", BigDecimal.valueOf(96.9483)));
 
         mockMvc.perform(get("/currencies/rates/USD"))
                 .andExpect(status().isOk())
@@ -72,8 +76,8 @@ class CurrencyControllerTest {
 
     @Test
     public void testConvertCurrency_Available() throws Exception {
-        CurrencyConverterRequest convReq = new CurrencyConverterRequest("USD", "RUB", 100.5);
-        CurrencyConverterResponse convResp = new CurrencyConverterResponse("USD", "RUB", 9743.30415);
+        CurrencyConverterRequest convReq = new CurrencyConverterRequest("USD", "RUB", BigDecimal.valueOf(100.5));
+        CurrencyConverterResponse convResp = new CurrencyConverterResponse("USD", "RUB", BigDecimal.valueOf(9743.30415));
         when(currencyService.convertCurrency(convReq)).thenReturn(convResp);
 
         mockMvc.perform(post("/currencies/convert")
