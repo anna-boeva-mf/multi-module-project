@@ -25,10 +25,10 @@ dependencies {
     testImplementation 'org.slf4j:slf4j-simple:2.0.16'
 }
 
-jmh { // 1 повтор бенчмарка, 1 прогревочная итерация, 5 итераций
+jmh { // 1 повтор бенчмарка, 1 прогревочная итерация, 3 итераций
     fork = 1
     warmupIterations = 1
-    iterations = 5
+    iterations = 3
 }
 
 sourceSets {
