@@ -36,9 +36,9 @@ public abstract class KafkaBenchmark {
     private static final String KEY = "key";
     private static final String VALUE = "Message!";
 
-    public KafkaBenchmark(int producersCount, int consumerNumber) {
+    public KafkaBenchmark(int producersCount, int consumerCount) {
         this.producersCount = producersCount;
-        this.consumersCount = consumerNumber;
+        this.consumersCount = consumerCount;
     }
 
     @Setup(Level.Trial)
