@@ -1,0 +1,19 @@
+Benchmark                                                Mode  Cnt    Score     Error  Units
+RabbitLoadBalancingAndMultipleConsumersTest.rabbitTest  thrpt   10  213,809 ±  72,279  ops/s
+RabbitLoadBalancingTest.rabbitTest                      thrpt   10  676,378 ± 214,551  ops/s
+RabbitMultipleConsumersTest.rabbitTest                  thrpt   10  220,925 ±  90,322  ops/s
+RabbitSimpleTest.rabbitTest                             thrpt   10  729,493 ± 254,377  ops/s
+RabbitSimpleTest_confirm.rabbitTest                     thrpt   10  403,679 ±  44,821  ops/s
+RabbitSimpleTest_sleep.rabbitTest                       thrpt   10   62,170 ±   1,685  ops/s
+RabbitStressTest.rabbitTest                             thrpt   10   65,086 ±  21,235  ops/s
+RabbitStressTest_confirm.rabbitTest                     thrpt   10   46,986 ±  10,021  ops/s
+RabbitStressTest_sleep.rabbitTest                       thrpt   10   31,564 ±   1,409  ops/s
+RabbitLoadBalancingAndMultipleConsumersTest.rabbitTest   avgt   10    0,005 ±   0,001   s/op
+RabbitLoadBalancingTest.rabbitTest                       avgt   10    0,001 ±   0,001   s/op
+RabbitMultipleConsumersTest.rabbitTest                   avgt   10    0,005 ±   0,002   s/op
+RabbitSimpleTest.rabbitTest                              avgt   10    0,001 ±   0,001   s/op
+RabbitSimpleTest_confirm.rabbitTest                      avgt   10    0,002 ±   0,001   s/op
+RabbitSimpleTest_sleep.rabbitTest                        avgt   10    0,016 ±   0,001   s/op
+RabbitStressTest.rabbitTest                              avgt   10    0,016 ±   0,008   s/op
+RabbitStressTest_confirm.rabbitTest                      avgt   10    0,018 ±   0,004   s/op
+RabbitStressTest_sleep.rabbitTest                        avgt   10    0,031 ±   0,001   s/op

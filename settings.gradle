@@ -6,4 +6,5 @@ pluginManagement {
 
 rootProject.name = 'multi-module-project'
 include 'cbr-cur'
+include 'queue-tests'
 
