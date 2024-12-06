@@ -22,8 +22,18 @@ public class RabbitProducer {
         channel.queueDeclare(QUEUE, false, false, false, null);
     }
 
-    public void send(String message) throws IOException {
-          channel.basicPublish("", QUEUE, null, message.getBytes(StandardCharsets.UTF_8));
+    public void send(String message, boolean waitForConfirmsFlg) throws IOException {
+        if (waitForConfirmsFlg) {
+            channel.confirmSelect();
+            channel.basicPublish("", QUEUE, null, message.getBytes(StandardCharsets.UTF_8));
+            try {
+                channel.waitForConfirms();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            channel.basicPublish("", QUEUE, null, message.getBytes(StandardCharsets.UTF_8));
+        }
     }
 
     public void close() {

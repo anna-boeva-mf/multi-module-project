@@ -33,12 +33,21 @@ public abstract class RabbitBenchmark {
 
     private final int producersCount;
     private final int consumersCount;
+    private boolean sleepFlg = false;
+    private boolean waitForConfirmsFlg = false;
 
     private static final String HOST = "localhost";
     private static final int PORT = 5672;
     private static final String USERNAME = "guest";
     private static final String PASSWORD = "guest";
     private static final String MESSAGE = "Message!";
+
+    public RabbitBenchmark(int producersCount, int consumerCount, boolean sleepFlg, boolean waitForConfirmsFlg) {
+        this.producersCount = producersCount;
+        this.consumersCount = consumerCount;
+        this.sleepFlg = sleepFlg;
+        this.waitForConfirmsFlg = waitForConfirmsFlg;
+    }
 
     public RabbitBenchmark(int producersCount, int consumerCount) {
         this.producersCount = producersCount;
@@ -65,11 +74,11 @@ public abstract class RabbitBenchmark {
     }
 
     @Benchmark
-    public void rabbitTest(Blackhole blackhole) {
+    public void rabbitTest(Blackhole blackhole) throws InterruptedException {
 
         producers.forEach(producer -> {
             try {
-                producer.send(MESSAGE);
+                producer.send(MESSAGE, waitForConfirmsFlg);
                 blackhole.consume(1);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -82,5 +91,12 @@ public abstract class RabbitBenchmark {
                 throw new RuntimeException(e);
             }
         });
+
+        blackhole.consume(producers);
+        blackhole.consume(consumers);
+
+        if (sleepFlg){
+            Thread.sleep(10);
+        }
     }
 }

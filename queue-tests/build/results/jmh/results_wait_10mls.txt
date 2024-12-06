@@ -1,0 +1,21 @@
+Benchmark                                                           Mode  Cnt   Score    Error  Units
+r.t.kafka.KafkaLoadBalancingAndMultipleConsumersTest.kafkaTest     thrpt   10   3,096 ±  0,063  ops/s
+r.t.kafka.KafkaLoadBalancingTest.kafkaTest                         thrpt   10   9,218 ±  0,209  ops/s
+r.t.kafka.KafkaMultipleConsumersTest.kafkaTest                     thrpt   10   3,079 ±  0,034  ops/s
+r.t.kafka.KafkaSimpleTest.kafkaTest                                thrpt   10   9,243 ±  0,207  ops/s
+r.t.kafka.KafkaStressTest.kafkaTest                                thrpt   10   0,923 ±  0,010  ops/s
+r.t.rabbit.RabbitLoadBalancingAndMultipleConsumersTest.rabbitTest  thrpt   10  54,889 ±  8,301  ops/s
+r.t.rabbit.RabbitLoadBalancingTest.rabbitTest                      thrpt   10  63,308 ±  3,016  ops/s
+r.t.rabbit.RabbitMultipleConsumersTest.rabbitTest                  thrpt   10  58,258 ±  6,515  ops/s
+r.t.rabbit.RabbitSimpleTest.rabbitTest                             thrpt   10  62,825 ±  3,554  ops/s
+r.t.rabbit.RabbitStressTest.rabbitTest                             thrpt   10  31,836 ±  1,523  ops/s
+r.t.kafka.KafkaLoadBalancingAndMultipleConsumersTest.kafkaTest      avgt   10   0,325 ±  0,007   s/op
+r.t.kafka.KafkaLoadBalancingTest.kafkaTest                          avgt   10   0,109 ±  0,002   s/op
+r.t.kafka.KafkaMultipleConsumersTest.kafkaTest                      avgt   10   0,323 ±  0,006   s/op
+r.t.kafka.KafkaSimpleTest.kafkaTest                                 avgt   10   0,109 ±  0,002   s/op
+r.t.kafka.KafkaStressTest.kafkaTest                                 avgt   10   1,077 ±  0,027   s/op
+r.t.rabbit.RabbitLoadBalancingAndMultipleConsumersTest.rabbitTest   avgt   10   0,017 ±  0,002   s/op
+r.t.rabbit.RabbitLoadBalancingTest.rabbitTest                       avgt   10   0,017 ±  0,001   s/op
+r.t.rabbit.RabbitMultipleConsumersTest.rabbitTest                   avgt   10   0,018 ±  0,002   s/op
+r.t.rabbit.RabbitSimpleTest.rabbitTest                              avgt   10   0,016 ±  0,001   s/op
+r.t.rabbit.RabbitStressTest.rabbitTest                              avgt   10   0,032 ±  0,003   s/op
