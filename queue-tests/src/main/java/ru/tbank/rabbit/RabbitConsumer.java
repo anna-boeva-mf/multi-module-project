@@ -23,8 +23,7 @@ public class RabbitConsumer {
     }
 
     public String consume() throws IOException {
-        return channel.basicConsume(QUEUE, true, new DefaultConsumer(channel) {
-        });
+        return channel.basicConsume(QUEUE, true, new DefaultConsumer(channel) {});
     }
 
     public void close() {

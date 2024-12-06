@@ -1,11 +1,21 @@
-Benchmark                                                           Mode  Cnt    Score      Error  Units
-r.t.kafka.KafkaLoadBalancingAndMultipleConsumersTest.kafkaTest     thrpt    3    3,227 ±    0,186  ops/s
-r.t.kafka.KafkaLoadBalancingTest.kafkaTest                         thrpt    3    9,549 ±    3,568  ops/s
-r.t.kafka.KafkaMultipleConsumersTest.kafkaTest                     thrpt    3    3,223 ±    0,061  ops/s
-r.t.kafka.KafkaSimpleTest.kafkaTest                                thrpt    3    9,667 ±    0,508  ops/s
-r.t.kafka.KafkaStressTest.kafkaTest                                thrpt    3    0,964 ±    0,105  ops/s
-r.t.rabbit.RabbitLoadBalancingAndMultipleConsumersTest.rabbitTest  thrpt    3  111,284 ±  556,221  ops/s
-r.t.rabbit.RabbitLoadBalancingTest.rabbitTest                      thrpt    3  355,281 ± 1788,435  ops/s
-r.t.rabbit.RabbitMultipleConsumersTest.rabbitTest                  thrpt    3  108,198 ±  815,893  ops/s
-r.t.rabbit.RabbitSimpleTest.rabbitTest                             thrpt    3  380,574 ± 2249,368  ops/s
-r.t.rabbit.RabbitStressTest.rabbitTest                             thrpt    3   34,136 ±  155,391  ops/s
+Benchmark                                                           Mode  Cnt    Score     Error  Units
+r.t.kafka.KafkaLoadBalancingAndMultipleConsumersTest.kafkaTest     thrpt   10    3,226 ±   0,064  ops/s
+r.t.kafka.KafkaLoadBalancingTest.kafkaTest                         thrpt   10    9,622 ±   0,280  ops/s
+r.t.kafka.KafkaMultipleConsumersTest.kafkaTest                     thrpt   10    3,234 ±   0,059  ops/s
+r.t.kafka.KafkaSimpleTest.kafkaTest                                thrpt   10    9,690 ±   0,143  ops/s
+r.t.kafka.KafkaStressTest.kafkaTest                                thrpt   10    0,965 ±   0,018  ops/s
+r.t.rabbit.RabbitLoadBalancingAndMultipleConsumersTest.rabbitTest  thrpt   10  228,743 ±  74,204  ops/s
+r.t.rabbit.RabbitLoadBalancingTest.rabbitTest                      thrpt   10  682,593 ± 106,138  ops/s
+r.t.rabbit.RabbitMultipleConsumersTest.rabbitTest                  thrpt   10  230,384 ±  68,327  ops/s
+r.t.rabbit.RabbitSimpleTest.rabbitTest                             thrpt   10  738,641 ± 199,458  ops/s
+r.t.rabbit.RabbitStressTest.rabbitTest                             thrpt   10   67,641 ±  26,313  ops/s
+r.t.kafka.KafkaLoadBalancingAndMultipleConsumersTest.kafkaTest      avgt   10    0,308 ±   0,006   s/op
+r.t.kafka.KafkaLoadBalancingTest.kafkaTest                          avgt   10    0,104 ±   0,002   s/op
+r.t.kafka.KafkaMultipleConsumersTest.kafkaTest                      avgt   10    0,310 ±   0,006   s/op
+r.t.kafka.KafkaSimpleTest.kafkaTest                                 avgt   10    0,103 ±   0,002   s/op
+r.t.kafka.KafkaStressTest.kafkaTest                                 avgt   10    1,050 ±   0,033   s/op
+r.t.rabbit.RabbitLoadBalancingAndMultipleConsumersTest.rabbitTest   avgt   10    0,005 ±   0,002   s/op
+r.t.rabbit.RabbitLoadBalancingTest.rabbitTest                       avgt   10    0,001 ±   0,001   s/op
+r.t.rabbit.RabbitMultipleConsumersTest.rabbitTest                   avgt   10    0,004 ±   0,001   s/op
+r.t.rabbit.RabbitSimpleTest.rabbitTest                              avgt   10    0,001 ±   0,001   s/op
+r.t.rabbit.RabbitStressTest.rabbitTest                              avgt   10    0,017 ±   0,009   s/op

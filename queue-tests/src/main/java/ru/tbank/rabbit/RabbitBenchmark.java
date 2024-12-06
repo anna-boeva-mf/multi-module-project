@@ -2,13 +2,16 @@ package ru.tbank.rabbit;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
+import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
 
@@ -18,9 +21,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-@BenchmarkMode(Mode.Throughput)
+@BenchmarkMode({Mode.Throughput, Mode.AverageTime})
 @OutputTimeUnit(TimeUnit.SECONDS)
 @State(Scope.Thread)
+@Fork(1)
+@Warmup(iterations = 2, time = 1)
+@Measurement(iterations = 10, time = 1)
 public abstract class RabbitBenchmark {
     private List<RabbitProducer> producers;
     private List<RabbitConsumer> consumers;
@@ -64,7 +70,7 @@ public abstract class RabbitBenchmark {
         producers.forEach(producer -> {
             try {
                 producer.send(MESSAGE);
-                blackhole.consume(MESSAGE);
+                blackhole.consume(1);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
